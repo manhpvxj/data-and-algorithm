@@ -23,6 +23,23 @@ class BinarySearchTree {
 
     return this.search(key, root.right);
   }
+
+  deleteNode(
+    key: number,
+    root?: BinarySearchTree
+  ): BinarySearchTree | undefined {
+    if (!root) return root;
+
+    if (root.key > key) {
+      root.left = this.deleteNode(key, root.left);
+      return root;
+    } else if (root.key < key) {
+      root.right = this.deleteNode(key, root.right);
+      return root;
+    }
+    if (!root.left) return root.right;
+    else if (!root.right) return root.left;
+  }
 }
 
 function main() {
