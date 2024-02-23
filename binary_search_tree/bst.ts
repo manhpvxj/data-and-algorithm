@@ -37,12 +37,17 @@ class BinarySearchTree {
       root.right = this.deleteNode(key, root.right);
       return root;
     }
-    if (!root.left) return root.right;
-    else if (!root.right) return root.left;
+    if (!root.left) {
+      let temp = root.right;
+      // @ts-ignore
+      delete root;
+
+      return temp;
+    } else if (!root.right) return root.left;
   }
 }
 
-function main() {
+function mainBST() {
   const tree = new BinarySearchTree(100);
 
   tree.insert(90, tree);
@@ -55,6 +60,10 @@ function main() {
   console.log("tree", tree);
   const node = tree.search(60, tree.left);
   console.log("node", node);
+
+  // tree.deleteNode(60, tree);
+
+  console.log("modified", tree);
 }
 
-main();
+mainBST();
